@@ -407,7 +407,13 @@ static void __vmpressure(gfp_t gfp, struct mem_cgroup *memcg, bool critical,
 void vmpressure(gfp_t gfp, struct mem_cgroup *memcg, bool tree,
 		unsigned long scanned, unsigned long reclaimed)
 {
-	__vmpressure(gfp, memcg, false, tree, scanned, reclaimed);
+
+	if (!memcg)
+		vmpressure_global(gfp, scanned, reclaimed);
+
+	if (IS_ENABLED(CONFIG_MEMCG))
+		vmpressure_memcg(gfp, memcg, tree, scanned, reclaimed);
+
 }
 
 /**
