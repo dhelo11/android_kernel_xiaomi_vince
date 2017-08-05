@@ -2905,8 +2905,11 @@ void ext4_process_freed_data(struct super_block *sb, tid_t commit_tid)
 				break;
 		}
 
-		if (discard_bio)
+		if (discard_bio) {
 			submit_bio_wait(discard_bio);
+
+			bio_put(discard_bio);
+		}
 
 	}
 
