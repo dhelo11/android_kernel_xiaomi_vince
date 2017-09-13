@@ -262,6 +262,14 @@ void flush_delayed_fput(void)
 static DECLARE_DELAYED_WORK(delayed_fput_work, delayed_fput);
 
 void flush_delayed_fput_wait(void)
+
+{
+	delayed_fput(NULL);
+	flush_delayed_work(&delayed_fput_work);
+}
+
+void fput(struct file *file)
+
 {
 	delayed_fput(NULL);
 	flush_delayed_work(&delayed_fput_work);
