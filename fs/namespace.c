@@ -1781,6 +1781,7 @@ dput_and_out:
 		/* flush delayed_mntput_work to put sb->s_active */
 		flush_delayed_mntput_wait();
 	}
+
 out:
 	return retval;
 }
