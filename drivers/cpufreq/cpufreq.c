@@ -30,11 +30,16 @@
 #include <linux/suspend.h>
 #include <linux/syscore_ops.h>
 #include <linux/tick.h>
+#include <linux/battery_saver.h>
+#include <trace/events/power.h>
+
 #ifdef CONFIG_SMP
 #include <linux/sched.h>
 #endif
+
 #include <trace/events/power.h>
 #include <linux/battery_saver.h>
+
 
 static LIST_HEAD(cpufreq_policy_list);
 
