@@ -150,7 +150,9 @@ struct scan_control {
 /*
  * From 0 .. 200.  Higher means more swappy.
  */
-int vm_swappiness = 100;
+
+int vm_swappiness = 80;
+
 /*
  * The total number of pages which are beyond the high watermark within all
  * zones.
@@ -4021,4 +4023,5 @@ void check_move_unevictable_pages(struct page **pages, int nr_pages)
 		spin_unlock_irq(&pgdat->lru_lock);
 	}
 }
+
 #endif /* CONFIG_SHMEM */
