@@ -1,5 +1,7 @@
 /* Copyright (c) 2008-2021, The Linux Foundation. All rights reserved.
- * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+
+ * Copyright (c) 2022-2023, Qualcomm Innovation Center, Inc. All rights reserved.
+
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -2288,6 +2290,7 @@ static int kgsl_setup_dmabuf_useraddr(struct kgsl_device *device,
 			return -EFAULT;
 		}
 
+
 		/*
 		 * Take a refcount because dma_buf_put() decrements the
 		 * refcount
@@ -2295,6 +2298,7 @@ static int kgsl_setup_dmabuf_useraddr(struct kgsl_device *device,
 		get_file(vma->vm_file);
 
 		dmabuf = vma->vm_file->private_data;
+
 	}
 
 	if (IS_ERR_OR_NULL(dmabuf)) {

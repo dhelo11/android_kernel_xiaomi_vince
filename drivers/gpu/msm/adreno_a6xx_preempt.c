@@ -1,5 +1,7 @@
 /* Copyright (c) 2017-2018,2020, The Linux Foundation. All rights reserved.
- * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+
+ * Copyright (c) 2022-2023, Qualcomm Innovation Center, Inc. All rights reserved.
+
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -557,8 +559,10 @@ unsigned int a6xx_preemption_pre_ibsubmit(
 		 * preemption
 		 */
 		if (!adreno_dev->perfcounter) {
-			u64 kmd_postamble_addr =
-			PREEMPT_SCRATCH_ADDR(adreno_dev, KMD_POSTAMBLE_IDX);
+
+			u64 kmd_postamble_addr = SCRATCH_POSTAMBLE_ADDR
+						(KGSL_DEVICE(adreno_dev));
+
 
 			*cmds++ = cp_type7_packet(CP_SET_AMBLE, 3);
 			*cmds++ = lower_32_bits(kmd_postamble_addr);
@@ -784,6 +788,7 @@ int a6xx_preemption_init(struct adreno_device *adreno_dev)
 	}
 
 	/*
+
 	 * First 8 dwords of the preemption scratch buffer is used to store the
 	 * address for CP to save/restore VPC data. Reserve 11 dwords in the
 	 * preemption scratch buffer from index KMD_POSTAMBLE_IDX for KMD
@@ -792,6 +797,7 @@ int a6xx_preemption_init(struct adreno_device *adreno_dev)
 	if (!adreno_dev->perfcounter) {
 		u32 *postamble = preempt->scratch.hostptr +
 					(KMD_POSTAMBLE_IDX * sizeof(u64));
+
 		u32 count = 0;
 
 		postamble[count++] = cp_type7_packet(CP_REG_RMW, 3);
