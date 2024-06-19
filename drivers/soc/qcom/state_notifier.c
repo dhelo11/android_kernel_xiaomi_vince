@@ -91,7 +91,7 @@ static void _resume_work(struct work_struct *work)
 static void _boost_work(struct work_struct *work)
 {
 	state_suspended = false;
-	state_notifier_call_chain(STATE_NOTIFIER_BOOST, NULL);
+
 }
 
 void state_suspend(void)
