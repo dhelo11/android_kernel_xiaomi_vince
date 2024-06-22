@@ -268,12 +268,6 @@ void flush_delayed_fput_wait(void)
 	flush_delayed_work(&delayed_fput_work);
 }
 
-void fput(struct file *file)
-
-{
-	delayed_fput(NULL);
-	flush_delayed_work(&delayed_fput_work);
-}
 
 void fput_many(struct file *file, unsigned int refs)
 {
